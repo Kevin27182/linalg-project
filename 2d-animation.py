@@ -56,7 +56,7 @@ def animatePoints(frames, save = False):
         return poly
 
     ani = anim.FuncAnimation(figure, update, frames = list(range(num_frames)), interval = 20, blit = True, repeat = False)
-    if save : ani.save(fpath + "\\2d-anim.gif", fps = 60)  
+    if save : ani.save(fpath + "\\2d-anim.gif", fps = 30)  
 
     plt.show()
 
@@ -69,5 +69,5 @@ hex_points = np.array([ [np.cos(phi * 0), np.cos(phi * 1), np.cos(phi * 2), np.c
 square_points = np.array([[-0.5,  0.5,  0.5, -0.5],
                           [-0.5, -0.5,  0.5,  0.5]])
 
-my_frames = genPoints(-2 * np.pi, square_points , anim_num_frames = 500)
-animatePoints(my_frames, save = False)
+my_frames = genPoints(np.pi/4, square_points, anim_num_frames = 50)
+animatePoints(my_frames, save = True)
