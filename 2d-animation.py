@@ -32,7 +32,7 @@ def genPoints(theta, start_points, anim_num_frames = 250):
 
     return anim_frames
 
-def animatePoints(frames, save = False):
+def animatePoints(frames, save = False, name = "2d-anim.gif", color="tab:blue"):
     """Animates given frames (takes as input: (2*n, 4) ndarray, where n is the number of animation frames)"""
 
     plt_size = 0
@@ -46,7 +46,7 @@ def animatePoints(frames, save = False):
     figure, ax = plt.subplots(figsize=(6, 6))
     ax.set_xlim([-plt_size, plt_size])
     ax.set_ylim([-plt_size, plt_size])
-    poly = plt.fill(frames[0],frames[1])
+    poly = plt.fill(frames[0],frames[1],color)
     num_frames = (int)(frames.shape[0] / 2)
 
     def update(i): 
@@ -56,7 +56,7 @@ def animatePoints(frames, save = False):
         return poly
 
     ani = anim.FuncAnimation(figure, update, frames = list(range(num_frames)), interval = 20, blit = True, repeat = False)
-    if save : ani.save(fpath + "\\2d-anim.gif", fps = 30)  
+    if save : ani.save(fpath + "\\{}".format(name), fps = 30)  
 
     plt.show()
 
@@ -69,5 +69,8 @@ hex_points = np.array([ [np.cos(phi * 0), np.cos(phi * 1), np.cos(phi * 2), np.c
 square_points = np.array([[-0.5,  0.5,  0.5, -0.5],
                           [-0.5, -0.5,  0.5,  0.5]])
 
-my_frames = genPoints(np.pi/4, square_points, anim_num_frames = 50)
-animatePoints(my_frames, save = True)
+my_square_frames = genPoints(np.pi / 4, square_points, anim_num_frames = 50)
+animatePoints(my_square_frames, save = False, name = "2d-anim-square.gif")
+
+my_hex_frames = genPoints(-np.pi, hex_points, anim_num_frames = 100)
+animatePoints(my_hex_frames, save = False, name = "2d-anim-hex.gif", color = "firebrick")
