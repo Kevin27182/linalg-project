@@ -30,6 +30,8 @@ def genPoints(theta, start_points, anim_num_frames = 250):
     for i in range(50):
         anim_frames = np.vstack([anim_frames, anim_frames[-2:]])
 
+    print(anim_frames[-2:].round(2))
+
     return anim_frames
 
 def animatePoints(frames, save = False, name = "2d-anim.gif", color="tab:blue"):
@@ -66,11 +68,11 @@ hex_points = np.array([ [np.cos(phi * 0), np.cos(phi * 1), np.cos(phi * 2), np.c
                         [np.sin(phi * 0), np.sin(phi * 1), np.sin(phi * 2), np.sin(phi * 3), np.sin(phi * 4), np.sin(phi * 5)] ])
 
 # Regular ole square
-square_points = np.array([[-0.5,  0.5,  0.5, -0.5],
-                          [-0.5, -0.5,  0.5,  0.5]])
+square_points = np.array([[-1,  1,  1, -1],
+                          [-1, -1,  1,  1]])
 
 my_square_frames = genPoints(np.pi / 4, square_points, anim_num_frames = 50)
 animatePoints(my_square_frames, save = False, name = "2d-anim-square.gif")
 
-my_hex_frames = genPoints(-np.pi, hex_points, anim_num_frames = 100)
-animatePoints(my_hex_frames, save = False, name = "2d-anim-hex.gif", color = "firebrick")
+# my_hex_frames = genPoints(-np.pi, hex_points, anim_num_frames = 100)
+# animatePoints(my_hex_frames, save = False, name = "2d-anim-hex.gif", color = "firebrick")
